@@ -1,6 +1,30 @@
+// Лабораторная работа 1 по дисциплине МРЗвИС
+// Выполнена студентами группы 121703
+// БГУИР Леквов Г.А., Кочурка В.В.
+// Вариант 16 - алгоритм вычисление произвдения пары 8-разрядных чисел умножением со старших разрядов со сдвигом частичной суммы влево.
+
 import { FunctionalComponent } from "preact";
 import { MultiplicationPair } from "../useMultiplicationHook";
-import { useRef } from "preact/hooks";
+import { useEffect, useRef } from "preact/hooks";
+
+
+
+const useKeyPress = (callback: () => void, key: string) => {
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === key) {
+                callback()
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown, true);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+
+    }, []);
+}
 
 export const InputControls: FunctionalComponent<{
     numsVector: MultiplicationPair[],
@@ -18,10 +42,21 @@ export const InputControls: FunctionalComponent<{
 
         try {
             const [first, second] = pair.split(' ')
-            addPair({ multipliable: parseInt(first), multiplier: parseInt(second) })
+            const f = parseInt(first)
+            const s = parseInt(second)
+
+            if (!f || !s) {
+                alert('wrong input: ' + f + ' ' + s)
+                return
+            }
+
+            addPair({ multipliable: f, multiplier: s })
             inputRef.current.value = ''
         } catch { }
     }
+    useKeyPress(() => {
+        addNumberToVector()
+    }, 'Enter', )
 
     return (
         <div class='flex gap-3 text-dark'>

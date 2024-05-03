@@ -1,3 +1,8 @@
+// Лабораторная работа 1 по дисциплине МРЗвИС
+// Выполнена студентами группы 121703
+// БГУИР Леквов Г.А., Кочурка В.В.
+// Вариант 16 - алгоритм вычисление произвдения пары 8-разрядных чисел умножением со старших разрядов со сдвигом частичной суммы влево.
+
 import { useSignal } from "@preact/signals";
 
 export interface Multiplier {
@@ -34,6 +39,16 @@ export type MultiplicationPair = {
 };
 
 export type Binary = (0 | 1)[];
+
+
+// Алгоритм сводится к следующим шагам:
+// 1. Исходное значение суммы принимается равным нулю;
+// 2. Выполняется сдвиг суммы частичных произведений влево на один разряд.
+// 3. Анализируется очередная цифра множителя (анализ начинается со стар-
+// шей цифры разряда). Если она равна единице, то к сумме частичного произведения 
+// прибавляется множимое, иначе – прибавление не производится.
+// 4. Пункты 2 и 3 последовательно повторяются для всех цифровых разрядов
+// множителя.
 
 export const useMultiplication = () => {
   const numsVector = useSignal<MultiplicationPair[]>([]);
@@ -73,12 +88,11 @@ export const useMultiplication = () => {
 
     for (let i = 0; i < 8; i++) {
       let stage = 0;
-      // shift
+
       for (let j = 0; j < items.length; j++) {
         items[j] = shift(items[j]);
         var row = j + 1 + i * 2 + stage;
         resultDetails.value[row].push({ ...items[j], operation: "shift" });
-        // console.log('tact [', row, ']  item: ', itemToString(items[j]))
       }
 
       stage++;
@@ -88,7 +102,6 @@ export const useMultiplication = () => {
         var row = j + 1 + i * 2 + stage;
 
         resultDetails.value[row].push({ ...items[j], operation: "add" });
-        // console.log('tact [', row, ']  item: ', itemToString(items[j]))
       }
     }
 

@@ -1,3 +1,9 @@
+// Лабораторная работа 1 по дисциплине МРЗвИС
+// Выполнена студентами группы 121703
+// БГУИР Леквов Г.А., Кочурка В.В.
+// Вариант 16 - алгоритм вычисление произвдения пары 8-разрядных чисел умножением со старших разрядов со сдвигом частичной суммы влево.
+
+
 import { Help } from './components/Help'
 import { InputControls } from './components/InputControls'
 import { InputVectorView } from './components/InputVectorView'
