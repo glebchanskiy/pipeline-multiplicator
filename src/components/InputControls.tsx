@@ -38,7 +38,7 @@ export const InputControls: FunctionalComponent<{
     const addNumberToVector = () => {
         if (!inputRef.current) return
 
-        const pair = inputRef.current.value
+        const pair = inputRef.current.value.trim()
 
         try {
             const [first, second] = pair.split(' ')
