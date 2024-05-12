@@ -4,6 +4,7 @@
 // Вариант 16 - алгоритм вычисление произвдения пары 8-разрядных чисел умножением со старших разрядов со сдвигом частичной суммы влево.
 
 
+import { useSignal } from '@preact/signals'
 import { Help } from './components/Help'
 import { InputControls } from './components/InputControls'
 import { InputVectorView } from './components/InputVectorView'
@@ -14,6 +15,7 @@ export function App() {
 
 
   const { addPair, clear, numsVector, start, result, resultDetails } = useMultiplication()
+  const hoveredNums = useSignal<string>('')
 
 
   return (
@@ -25,12 +27,12 @@ export function App() {
       {numsVector.length > 0 &&
         <>
           <hr />
-          <InputVectorView numsVector={numsVector} />
+          <InputVectorView hoveredNums={hoveredNums} numsVector={numsVector} />
         </>}
 
       {result.length > 0 && <>
         <hr />
-        <ResultView result={result} resultDetails={resultDetails} />
+        <ResultView hoveredNums={hoveredNums} result={result} resultDetails={resultDetails} />
       </>}
 
     </div>

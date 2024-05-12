@@ -56,15 +56,18 @@ export const InputControls: FunctionalComponent<{
     }
     useKeyPress(() => {
         addNumberToVector()
-    }, 'Enter', )
+    }, 'Enter',)
 
     return (
-        <div class='flex gap-3 text-dark'>
-            <input ref={inputRef} type="text" placeholder={'num1 num2'} class='h-6 pl-1 bg-white rounded-md focus:!outline-none' />
-            <button onClick={addNumberToVector} class='opacity-70 hover:opacity-100 h-6 w-6 flex justify-center items-center border border-1 border-white rounded-md' ><IconPlus class='text-white fill-white' /></button>
-            <button onClick={clear} class='opacity-70 hover:opacity-100 h-6 w-12 flex justify-center items-center border border-1 border-white rounded-md' ><span class='text-white'>clear</span></button>
-            <button onClick={start} class='opacity-70 hover:opacity-100 h-6 w-12 flex justify-center items-center border border-1 border-white rounded-md' ><span class='text-white'>start</span></button>
-        </div>
+        <>
+            <div class='flex gap-3 text-dark'>
+                <input ref={inputRef} type="text" placeholder={'num1 num2'} class='h-6 pl-1 bg-white rounded-md focus:!outline-none' />
+                <button onClick={addNumberToVector} class='opacity-70 hover:opacity-100 h-6 w-6 flex justify-center items-center border border-1 border-white rounded-md' ><IconPlus class='text-white fill-white' /></button>
+                <button onClick={clear} class='opacity-70 hover:opacity-100 h-6 w-12 flex justify-center items-center border border-1 border-white rounded-md' ><span class='text-white'>clear</span></button>
+                <button onClick={start} class='opacity-70 hover:opacity-100 h-6 w-12 flex justify-center items-center border border-1 border-white rounded-md' ><span class='text-white'>start</span></button>
+            </div>
+            <span>Eenter a pair of numbers and press [+] (Cmd + Enter) to add to the vector </span>
+        </>
     )
 }
 
